@@ -45,12 +45,10 @@ def __appendTitleOfDocument(document):
     set_Font(paragraph, font_size, font_name)
 
 
-conclusion = " ".join(form_data['conclusionParts'])
-recommendation = " ".join(form_data['recommendationParts'])
-
-
-def __appendPupilDataConclusionAndRecommendation(document, form_data):
-    elements = ['Nazwisko i imię ucznia ' + form_data['pupilDTO'] + '\nKlasa ' + form_data['pupilDTO'],
+def __appendPupilDataConclusionAndRecommendation(document, _form_data):
+    conclusion = " ".join(form_data['conclusionParts'])
+    recommendation = " ".join(form_data['recommendationParts'])
+    elements = ['Nazwisko i imię ucznia ' + _form_data['pupilDTO'] + '\nKlasa ' + _form_data['pupilDTO'],
                 'Rodzaj zajęć',
                 'Nauczyciel prowadzący zajęcia',
                 'Wnioski ( co się poprawiło lub uległo pogorszeniu? )\n' + conclusion,

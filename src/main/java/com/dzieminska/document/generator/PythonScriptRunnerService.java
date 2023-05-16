@@ -52,6 +52,4 @@ public class PythonScriptRunnerService {
 		String id = UUID.randomUUID().toString();
 		return "diploma-" + id + ".docx";
 	}
-
 }
-
