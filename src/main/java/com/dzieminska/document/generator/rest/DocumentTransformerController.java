@@ -55,5 +55,4 @@ public class DocumentTransformerController {
 	public List<PupilDTO> providePupilOptions() throws IOException {
 		return pupilOptions;
 	}
-
 }
