@@ -14,7 +14,7 @@ inp = args.form_data
 document_name = args.document_name
 form_data = json.loads(inp)
 
-font_name = 'Arial'
+font_name = 'Times New Roman'
 font_size = 12
 
 
@@ -48,11 +48,13 @@ def __appendTitleOfDocument(document):
 def __appendPupilDataConclusionAndRecommendation(document, _form_data):
     conclusion = " ".join(form_data['conclusionParts'])
     recommendation = " ".join(form_data['recommendationParts'])
-    elements = ['Nazwisko i imię ucznia ' + _form_data['pupilDTO'] + '\nKlasa ' + _form_data['pupilDTO'],
-                'Rodzaj zajęć',
-                'Nauczyciel prowadzący zajęcia',
-                'Wnioski ( co się poprawiło lub uległo pogorszeniu? )\n' + conclusion,
-                'Zalecenia dotyczące dalszych działań mających na celu poprawę funkcjonowania ucznia\n' + recommendation]
+    class_number = _form_data['pupilDTO']['classNumber']
+    pupil_name = _form_data['pupilDTO']['name']
+    elements = ['Nazwisko i imię ucznia: ' + pupil_name + '\nKlasa:' + class_number,
+                'Rodzaj zajęć:' + ' zajęcia korekcyjno-kompensacyjne',
+                'Nauczyciel prowadzący zajęcia:' + ' Hanna Krefft-Dziemińska',
+                'Wnioski ( co się poprawiło lub uległo pogorszeniu? ):\n' + conclusion,
+                'Zalecenia dotyczące dalszych działań mających na celu poprawę funkcjonowania ucznia:\n' + recommendation]
     for i in elements:
         paragraph = document.add_paragraph(i, style='List Number')
         set_Font(paragraph, font_size, font_name)
@@ -60,7 +62,7 @@ def __appendPupilDataConclusionAndRecommendation(document, _form_data):
 
 def __appendDate(document):
     date = document.add_paragraph()
-    run = date.add_run('Data')
+    run = date.add_run('Data:\n' + '13.06.2023r.')
     date.alignment = WD_ALIGN_PARAGRAPH.LEFT
     date.paragraph_format.left_indent = Inches(0.5)
     set_Font(date, font_size, font_name)
