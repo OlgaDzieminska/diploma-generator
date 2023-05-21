@@ -2,5 +2,18 @@ package com.dzieminska.document.generator.dto;
 
 import java.util.List;
 
-public record DiplomaGeneratorFormDTO(PupilDTO pupilDTO, List<String> conclusionParts, List<String> recommendationParts) {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@AllArgsConstructor
+@Getter
+@Setter
+public final class DiplomaGeneratorFormDTO {
+	private final PupilDTO pupilDTO;
+	private final List<String> conclusionParts;
+	private final List<String> recommendationParts;
+	private String lecture;
+	private String teacher;
+	private String date;
 }

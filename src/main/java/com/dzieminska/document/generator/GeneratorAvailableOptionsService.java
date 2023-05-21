@@ -19,10 +19,11 @@ public class GeneratorAvailableOptionsService {
 	public List<PupilDTO> providePupilsOptions() throws IOException {
 		List<PupilDTO> pupilDTOList = new ArrayList<>();
 		Reader reader = Files.newBufferedReader(ResourceUtils.getFile("classpath:AvailableOptions/pupil.csv").toPath(), StandardCharsets.UTF_8);
-		CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT);
+		CSVParser csvParser = new CSVParser(reader, CSVFormat.DEFAULT.builder().setHeader().setSkipHeaderRecord(true).build());
+
 		for (CSVRecord csvRecord : csvParser) {
 			String name = csvRecord.get(0);
-			int classNumber = Integer.parseInt(csvRecord.get(1));
+			String classNumber = csvRecord.get(1);
 			pupilDTOList.add(new PupilDTO(name, classNumber));
 		}
 		return pupilDTOList;

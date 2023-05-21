@@ -14,10 +14,11 @@ class PythonScriptRunnerTest {
 	@Test
 	void runPythonScript() throws Exception {
 		// given
-		DiplomaGeneratorFormDTO formDTO = new DiplomaGeneratorFormDTO(new PupilDTO("Michal", 3), List.of("c1", "c2"), List.of());
+		DiplomaGeneratorFormDTO formDTO = new DiplomaGeneratorFormDTO(new PupilDTO("Michal", "3"), List.of("c1", "c2"), List.of(), "Jan Nowak", "wyrównawcze",
+				"16.06.2023r.");
 
 		// when
-		service.run("src/test/resources/DiplomaGenerator.py", formDTO);
+		service.run("DiplomaGenerator.py", formDTO);
 
 	}
 }
