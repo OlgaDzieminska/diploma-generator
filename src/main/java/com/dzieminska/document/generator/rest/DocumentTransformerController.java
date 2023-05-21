@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +26,12 @@ public class DocumentTransformerController {
 	private final List<String> recommendationOptions;
 	private final List<String> conclusionOptions;
 	private final List<PupilDTO> pupilOptions;
+	@Value("${lecture}")
+	private String lecture;
+	@Value("${teacher}")
+	private String teacher;
+	@Value("${date}")
+	private String date;
 
 	public DocumentTransformerController(PythonScriptRunnerService pythonScriptRunnerService,
 			@Qualifier("recommendationOptions") List<String> recommendationOptions, @Qualifier("conclusionOptions") List<String> conclusionOptions,
@@ -37,6 +44,9 @@ public class DocumentTransformerController {
 
 	@PostMapping(value = "/generate", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
 	public byte[] generateFile(@RequestBody DiplomaGeneratorFormDTO diplomaGeneratorFormDTO) throws Exception {
+		diplomaGeneratorFormDTO.setTeacher(teacher);
+		diplomaGeneratorFormDTO.setLecture(lecture);
+		diplomaGeneratorFormDTO.setDate(date);
 		File outputFile = pythonScriptRunnerService.run("DiplomaGenerator.py", diplomaGeneratorFormDTO);
 		return FileUtils.readFileToByteArray(outputFile);
 	}
